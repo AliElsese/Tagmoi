@@ -1,0 +1,48 @@
+<header class="d-flex align-items-center justify-content-between bg-white fixed-top">
+
+    <div class="d-flex align-items-center logo">
+        <img src="/assets/img/logo.png" alt="">
+        <div class="language">
+            <a href="" class="active">English</a>
+            <a href="">Arabic</a>
+        </div>
+    </div>
+
+    <div class="profile align-items-center">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="/assets/img/profile.png" alt="Profile" class="rounded-circle">
+        </a>
+        
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+            <li>
+                <a class="dropdown-item d-flex align-items-center" style="padding-left: 1.8vw;">
+                    <span><%= member_role %></span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" style="margin-bottom: 2.08vw;">
+                    <span><%= member_email %></span>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="/edit-member/<%= member_id %>">
+                    <i class="bi bi-person"></i>
+                    <span>Edit Profile</span>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>                
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="/logout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</header>

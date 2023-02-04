@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Tagmoi</title>
+
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/all.min.css">
+        <link rel="stylesheet" href="/assets/css/style-website.css">
+
+    </head>
+
+    <body>
+
+        <%- include('include/_header') %>
+
+        <div class="row flex-nowrap">
+            <div class="col-auto">
+                <aside class="sidebar bg-white">
+                    <ul class="sidebar-nav" id="sidebar-nav">
+                    
+                        <li class="nav-item">
+                            <span class="d-flex justify-content-between align-items-center">
+                                <a class="nav-link" href="/header" style="display: inline-block;">
+                                    header
+                                </a>
+                                <i class="fa-solid fa-caret-down me-4" data-bs-target="#header-nav" data-bs-toggle="collapse" style="cursor: pointer;display: inline-block;color: #000000;"></i>
+                            </span>
+                            <ul id="header-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                                <li>
+                                    <a href="/logo">
+                                        logo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/announcment-bar">
+                                        announcment bar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-divider"></li>
+                        <% for(var x = 0; x < sections.length; x++) { %>
+                        <% if(sections[x].section_id == section[0].section_id) { %>
+                            <li class="nav-item active">
+                                <span class="active d-flex justify-content-between align-items-center">
+                                    <a class="nav-link active" href="/<%= sections[x].section_enName %>" style="display: inline-block;">
+                                        <%= sections[x].section_enName %>
+                                    </a>
+                                    <i class="fa-solid fa-caret-down me-4" data-bs-target="#<%= sections[x].section_enName %>-nav" data-bs-toggle="collapse" style="cursor: pointer;display: inline-block;color: #00B0FF;"></i>
+                                </span>
+                                <ul id="<%= sections[x].section_enName %>-nav" class="nav-content collapse active" data-bs-parent="#sidebar-nav">
+                                    <% for(var y = 0; y < sbsections.length; y++) { %>
+                                        <% if (sections[x].section_id != sbsections[y].section_id) continue %>
+                                        <li>
+                                            <a href="/<%= sbsections[y].sb_enName %>">
+                                                <%= sbsections[y].sb_enName %>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <span class="d-flex justify-content-between align-items-center">
+                                    <a class="nav-link" href="/<%= sections[x].section_enName %>" style="display: inline-block;">
+                                        <%= sections[x].section_enName %>
+                                    </a>
+                                    <i class="fa-solid fa-caret-down me-4" data-bs-target="#<%= sections[x].section_enName %>-nav" data-bs-toggle="collapse" style="cursor: pointer;display: inline-block;color: #000000;"></i>
+                                </span>
+                                <ul id="<%= sections[x].section_enName %>-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                                    <% for(var y = 0; y < sbsections.length; y++) { %>
+                                        <% if (sections[x].section_id != sbsections[y].section_id) continue %>
+                                        <li>
+                                            <a href="/<%= sbsections[y].sb_enName %>">
+                                                <%= sbsections[y].sb_enName %>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </li>
+                        <% } %>
+                        <li class="sidebar-divider"></li>
+                        <% } %>
+                    </ul>
+                </aside>
+            </div>
+            <div class="col">
+                <div class="content">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-between">
+                                <div class="page-title">
+                                    <h2><%= section[0].section_enName %></h2>
+                                </div>
+                                <div class="page-buttons d-flex">
+                                    <a data-bs-toggle="modal" data-bs-target="#addExtSection" class="btn me-2" style="cursor: pointer;">add new external section</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#addIntSection" class="btn" style="cursor: pointer;">add new internal section</a>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="addExtSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Section</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="padding-right: 6.56vw;"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/addHeaderSection" method="post" class="d-flex">
+                                        <input type="text" name="section_en" placeholder="Add Your Text">
+                                        <input type="text" name="section_ar" placeholder="اضف النص الخاص بك" style="text-align: right;padding-right: 2.3vw;">
+                                        <button type="submit">Add</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="addIntSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Section</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="padding-right: 6.56vw;"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/addSubSection" method="post" class="d-flex">
+                                        <input type="hidden" name="section_id" value="<%= section[0].section_id %>">
+                                        <input type="text" name="section_en" placeholder="Add Your Text">
+                                        <input type="text" name="section_ar" placeholder="اضف النص الخاص بك" style="text-align: right;padding-right: 2.3vw;">
+                                        <button type="submit">Add</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-results">
+                        <div class="row mb-5">
+                            <div class="col-12 text-center">
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal1" class="order">re-order</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <% for(var x = 0; x < sbsections.length; x++) { %>
+                                <% if (sbsections[x].section_id != section[0].section_id) continue %>
+                                <div class="result">
+                                    <div class="row">
+                                        <div class="col-12 d-flex align-items-center justify-content-between">
+                                            <div class="d-flex">
+                                                <form action="/SubSectionVisiblity" method="post">
+                                                    <input type="hidden" name="section_id" value="<%= sbsections[x].sb_id %>">
+                                                    <% if(sbsections[x].sb_status == 'true') { %>
+                                                        <button type="submit" class="eye"><i class="fa-solid fa-eye"></i></button>
+                                                    <% } else { %>
+                                                        <button type="submit" class="eye"><i class="fa-solid fa-eye-slash"></i></button>
+                                                    <% } %>
+                                                </form>
+                                            </div>
+                                            <input type="text" value="<%= sbsections[x].sb_enName %>" disabled>
+                                            <input type="text" value="<%= sbsections[x].sb_arName %>" disabled style="text-align: right;padding-right: 3.44vw;">
+                                            <div class="d-flex">
+                                                <a href=""><i class="fa-regular fa-eye" style="border: 2px solid black;"></i></a>
+                                                <a data-bs-toggle="modal" data-bs-target="#editSection<%= sbsections[x].sb_id %>" style="cursor: pointer;"><i class="fa-solid fa-pen"></i></a>
+                                                <form action="/subSectionDelete" method="post">
+                                                    <input type="hidden" name="section_id" value="<%= sbsections[x].sb_id %>">
+                                                    <% if(sbsections[x].sb_delete == 'true') { %>
+                                                        <button type="submit" class="trash" style="background-color: transparent;"><i class="fa-solid fa-trash"></i></button>
+                                                    <% } else { %>
+                                                        <button type="submit" style="visibility: hidden;" class="trash"><i class="fa-solid fa-trash"></i></button>
+                                                    <% } %>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="modal fade" id="editSection<%= sbsections[x].sb_id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Section</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="padding-right: 6.56vw;"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/editSubSection" method="post" class="d-flex">
+                                                    <input type="hidden" name="section_id" value="<%= sbsections[x].sb_id %>">
+                                                    <input type="text" name="section_en" value="<%= sbsections[x].sb_enName %>">
+                                                    <input type="text" name="section_ar" value="<%= sbsections[x].sb_arName %>" style="text-align: right;padding-right: 2.3vw;">
+                                                    <button type="submit">Save</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider"></div>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Re-Order Sections</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="padding-right: 6.56vw;"></button>
+                                </div>
+                                <form action="/reordersbs" method="post">
+                                    <div class="modal-body wrapper">
+                                        <% for(var x = 0; x < sbsections.length; x++) { %>
+                                            <div class="result item">
+                                                <div class="row">
+                                                    <div class="col-12 d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex">
+                                                            <a href=""><i class="fa-solid fa-ellipsis-vertical me-0"></i></a>
+                                                            <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                        </div>
+                                                        <input type="text" value="<%= sbsections[x].sb_enName %>" disabled>
+                                                        <input type="text" value="<%= sbsections[x].sb_arName %>" disabled style="text-align: right;padding-right: 3.44vw;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="divider"></div>
+                                        <% } %>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+        <script>
+            const dragArea = document.querySelector(".wrapper")
+            new Sortable(dragArea , {
+                animation : 350
+            })
+        </script>
+        
+    </body>
+
+</html>

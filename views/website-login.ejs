@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Tagmoi Dashboard</title>
+
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/all.min.css">
+        <link rel="stylesheet" href="/assets/css/style-website.css">
+
+    </head>
+
+    <body>
+
+        <div class="sign-in">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-between">
+                        <div class="login-form">
+                            <div class="card d-flex flex-column align-items-center">
+                                <img src="/assets/img/login-logo.png" alt="">
+                                <h3>Login</h3>
+                                <% if(typeof message != 'undefined') { %>
+                                    <div class="col-md-12 text-center">
+                                        <h4 class="alert alert-danger mt-2">
+                                            <%= message %>
+                                        </h4>
+                                    </div>
+                                <% } %>
+                                <form action="/websiteLogin" method="post">
+                                    <input type="text" name="username" id="" placeholder="Mail@website.com">
+                                    <input type="password" name="password" id="" placeholder="Password">
+                                    <button type="submit">Log in</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="login-text">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="assets/img/kalamey logo gold.png" alt="">
+                                <p>Tagmoi is a technology company who is looking forbetter using for NFC technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/all.min.js"></script>
+        
+    </body>
+
+</html>
